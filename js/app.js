@@ -14,10 +14,12 @@ var app = {
       };
       request.send(null);
     },
+
     test: function () {
       app.tools.makeRequest('GET','https://restcountries.eu/rest/v2/all',true,app.tools.callback);
     },
-    callback:function () {
+
+    callback:function (json) {
       if (json) {
         console.log(json.toString());
       }
