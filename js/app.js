@@ -1,4 +1,23 @@
 var app = {
+  countryManagement:{
+    all: function () {
+      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/all', true, app.renderView.test);
+    },
+    
+    regionByContry:function () {
+
+    }
+  },
+
+  renderView:{
+    test:function (json) {
+      if (json) {
+        var container = document.querySelector('.general-container');
+        container.innerHTML = '<h1>THERE IS A JSON!!!, JSON.length = '+json.length+'</h1>';
+      }
+    }
+  },
+
   tools:{
     makeRequest: function (httpMethod, url, asynchronous, callback) {
       var request = new XMLHttpRequest();
@@ -16,12 +35,12 @@ var app = {
     },
 
     test: function () {
-      app.tools.makeRequest('GET','https://restcountries.eu/rest/v2/all',true,app.tools.callback);
+      app.tools.makeRequest('GET','https://restcountries.eu/rest/v2/all',true,app.tools.callbackTest);
     },
 
-    callback:function (json) {
+    callbackTest:function (json) {
       if (json) {
-        console.log(json.toString());
+        console.log('THERE IS JSON!!!');
       }
     }
   }
