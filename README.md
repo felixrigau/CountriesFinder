@@ -1,2 +1,2 @@
-# OpenSourceCompare
-A tool to compare open source libraries
+# CountriesFinder
+A tool to find countries, cities and more
