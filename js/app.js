@@ -2,6 +2,9 @@ var app = {
   countryManagement:{
     all: function () {
       app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/all', true, app.renderView.test);
+    },
+    details: function (code) {
+      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/alpha/'+code, true, app.renderView.test);
     }
   },
 
@@ -10,7 +13,7 @@ var app = {
       if (json) {
         var container = document.querySelector('.general-container');
         container.innerHTML = '<h1>THERE IS A JSON!!!, JSON.length = '+json.length+'</h1>';
-        console.table(json)
+        console.table(json);
       }
     }
   },
