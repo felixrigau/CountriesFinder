@@ -83,3 +83,19 @@ var app = {
     }
   }
 };
+
+var map;
+function initMap(name) {
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: 17});
+  var geocoder = new google.maps.Geocoder;
+  geocoder.geocode({'address': name}, function(results, status) {
+    if (status === 'OK') {
+      console.log(results);
+      map.setCenter(results[0].geometry.location);
+      map.fitBounds(results[0].geometry.bounds  );
+
+    } else {
+      console.log('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
