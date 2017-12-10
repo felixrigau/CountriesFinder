@@ -19,6 +19,29 @@ var app = {
       }
     },
 
+    maps:{
+      initCountryMap:function (address) {
+        if (address) {
+          var map = new google.maps.Map(document.getElementById('map'), {zoom: 17});
+          var geocoder = new google.maps.Geocoder;
+          geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+              console.log(results);
+              map.setCenter(results[0].geometry.location);
+              map.fitBounds(results[0].geometry.bounds);
+            } else {
+              console.log('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+        }else {
+          var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 33.8003164, lng: 5.065498},
+          zoom: 3
+        });
+        }
+      }
+    },
+
     fillCountryDetails:function (json) {
       if (json) {
         var flag = document.querySelector('.flag');
@@ -29,7 +52,7 @@ var app = {
         name.innerText = json.name;
         population.innerText = json.population;
 
-        initMap(json.name);
+        app.renderView.maps.initCountryMap(json.name);
       }
     },
 
@@ -84,18 +107,6 @@ var app = {
   }
 };
 
-var map;
-function initMap(name) {
-  var map = new google.maps.Map(document.getElementById('map'), {zoom: 17});
-  var geocoder = new google.maps.Geocoder;
-  geocoder.geocode({'address': name}, function(results, status) {
-    if (status === 'OK') {
-      console.log(results);
-      map.setCenter(results[0].geometry.location);
-      map.fitBounds(results[0].geometry.bounds  );
-
-    } else {
-      console.log('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-}
+(function () {
+  app.countryManagement.all();
+})();

@@ -28,13 +28,16 @@
     <div class="detailsCountry">
       <img class="flag" src="" alt="" width='100'>
       <h3 class="name"></h3>
+      <p class="capital"></p>
+      <p class="region"></p>
+      <p class="codeCall"></p>
       <p class="population"></p>
     </div>
   </div>
   <div id="map"></div>
   <script type="text/javascript" src="config/keys-tokens.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=x&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=x&callback=app.renderView.maps.initCountryMap"
     async defer>
   </script>
 </body>
