@@ -7,33 +7,22 @@
     <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
 </head>
 <body>
-  <div class="general-container">
-    <select name="countries" class="countries">
-    </select>
-    <div class="detailsCountry">
-      <img class="flag" src="" alt="" width='100'>
-      <h3 class="name"></h3>
-      <p class="capital"></p>
-      <p class="region"></p>
-      <p class="codeCall"></p>
-      <p class="population"></p>
+    <div class="combo-container">
+      <select name="countries" class="countries">
+      </select>
     </div>
-  </div>
+    <div class="country-container">
+      <div class="country-info">
+        <img class="flag" src="" alt="">
+        <h3 class="name"></h3>
+        <p class="capital">Capital:<span></span></p>
+        <p class="region">Region:<span></span></p>
+        <p class="codeCall">Código llamadas:<span></span></p>
+        <p class="population">Población:<span></span></p>
+      </div>
+    </div>
   <div id="map"></div>
   <script type="text/javascript" src="config/keys-tokens.js"></script>
   <script type="text/javascript" src="js/app.js"></script>

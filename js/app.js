@@ -46,11 +46,17 @@ var app = {
       if (json) {
         var flag = document.querySelector('.flag');
         var name = document.querySelector('.name');
-        var population = document.querySelector('.population');
+        var capital = document.querySelector('.capital span');
+        var region = document.querySelector('.region span');
+        var codeCall = document.querySelector('.codeCall span');
+        var population = document.querySelector('.population span');
 
         flag.src = json.flag;
         name.innerText = json.name;
-        population.innerText = json.population;
+        capital.innerText = " "+ json.capital;
+        region.innerText = " "+ json.subregion;
+        codeCall.innerText = " +"+ json.callingCodes[0];
+        population.innerText = " "+ json.population + " habitantes";
 
         app.renderView.maps.initCountryMap(json.name);
       }
