@@ -1,19 +1,57 @@
 var app = {
   countryManagement:{
     all: function () {
-      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/all', true, app.renderView.test);
+      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/all', true, app.renderView.fillCountries);
     },
     details: function (code) {
-      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/alpha/'+code, true, app.renderView.test);
+      app.tools.makeRequest('GET', 'https://restcountries.eu/rest/v2/alpha/'+code, true, app.renderView.fillCountryDetails);
     }
   },
 
   renderView:{
+    fillCountries: function (json) {
+      if(json){
+        var countriesCombo = document.querySelector('.countries');
+        for (var i = 0; i < json.length; i++) {
+          countriesCombo.innerHTML += '<option class=\'item\' value=\"'+json[i].alpha2Code+'\">'+json[i].name+'</option>';
+        }
+        app.events.setOnChangeEvent();
+      }
+    },
+
+    fillCountryDetails:function (json) {
+      if (json) {
+        var flag = document.querySelector('.flag');
+        var name = document.querySelector('.name');
+        var population = document.querySelector('.population');
+
+        flag.src = json.flag;
+        name.innerText = json.name;
+        population.innerText = json.population;
+
+        initMap(json.name);
+      }
+    },
+
     test:function (json) {
       if (json) {
         var container = document.querySelector('.general-container');
         container.innerHTML = '<h1>THERE IS A JSON!!!, JSON.length = '+json.length+'</h1>';
         console.table(json);
+      }
+    }
+  },
+
+  events:{
+    setOnChangeEvent:function () {
+      var selectItems = document.querySelectorAll('.countries');
+      for (var i = 0; i < selectItems.length; i++) {
+        selectItems[i].addEventListener('change',function () {
+          if(event.target.value){
+            codeCountry = event.target.value;
+            app.countryManagement.details(codeCountry);
+          }
+        }, false);
       }
     }
   },
