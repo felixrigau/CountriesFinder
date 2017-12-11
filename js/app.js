@@ -37,6 +37,7 @@ var app = {
         population.innerText = " "+ json.population + " habitantes";
 
         app.renderView.maps.initCountryMap(json.name);
+        app.animation.showCountryDetailsPanel(true);
       }
     },
 
@@ -97,6 +98,47 @@ var app = {
           }
         }, false);
       }
+    },
+
+    addToggleButton: function () {
+      var button = document.querySelector('.button');
+      button.addEventListener('click',function() {
+        app.animation.toggle();
+      },true);
+    }
+  },
+
+  animation:{
+    showCountryDetailsPanel:function functionName(boolean) {
+      var element = document.querySelector('.country-container');
+      var existClass = false;
+      if (boolean) {
+        for (var i = 0; i < element.classList.length; i++) {
+          if (element.classList[i] === "hidden") {
+            existClass = true;
+          }
+        }
+        if (existClass) {
+          element.classList.remove('hidden');
+        }
+      }else {
+        element.classList.add('hidden');
+      }
+    },
+
+    toggle:function () {
+      var element = document.querySelector('.country-container');
+      var exist = false;
+        for (var i = 0; i < element.classList.length; i++) {
+          if (element.classList[i] === "hidden") {
+            exist = true;
+          }
+        }
+        if (exist) {
+          element.classList.remove('hidden');
+        }else {
+          element.classList.add('hidden');
+        }
     }
   },
 
@@ -143,4 +185,5 @@ var app = {
 
 (function () {
   app.countryManagement.all();
+  app.events.addToggleButton();
 })();
