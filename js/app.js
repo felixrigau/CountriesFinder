@@ -13,32 +13,10 @@ var app = {
       if(json){
         var countriesCombo = document.querySelector('.countries');
         for (var i = 0; i < json.length; i++) {
-          countriesCombo.innerHTML += '<option class=\'item\' value=\"'+json[i].alpha2Code+'\">'+json[i].name+'</option>';
+          name = app.tools.removeParenthesesContent(json[i].name);
+          countriesCombo.innerHTML += '<option class=\'item\' value=\"'+json[i].alpha2Code+'\">'+name+'</option>';
         }
         app.events.setOnChangeEvent();
-      }
-    },
-
-    maps:{
-      initCountryMap:function (address) {
-        if (address) {
-          var map = new google.maps.Map(document.getElementById('map'), {zoom: 17});
-          var geocoder = new google.maps.Geocoder;
-          geocoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
-              console.log(results);
-              map.setCenter(results[0].geometry.location);
-              map.fitBounds(results[0].geometry.bounds);
-            } else {
-              console.log('Geocode was not successful for the following reason: ' + status);
-            }
-          });
-        }else {
-          var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 33.8003164, lng: 5.065498},
-          zoom: 3
-        });
-        }
       }
     },
 
@@ -52,13 +30,50 @@ var app = {
         var population = document.querySelector('.population span');
 
         flag.src = json.flag;
-        name.innerText = json.name;
+        name.innerText = app.tools.removeParenthesesContent(json.name);
         capital.innerText = " "+ json.capital;
         region.innerText = " "+ json.subregion;
         codeCall.innerText = " +"+ json.callingCodes[0];
         population.innerText = " "+ json.population + " habitantes";
 
         app.renderView.maps.initCountryMap(json.name);
+      }
+    },
+
+    maps:{
+      initCountryMap:function (address) {
+        if (address) {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 17,
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+          });
+          var geocoder = new google.maps.Geocoder;
+          geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+              console.log(results);
+              map.setCenter(results[0].geometry.location);
+              map.fitBounds(results[0].geometry.bounds);
+            } else {
+              console.log('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+        }else {
+          var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 33.8003164, lng: 5.065498},
+          zoom: 3,
+          zoomControl: true,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false
+        });
+        }
       }
     },
 
@@ -99,6 +114,19 @@ var app = {
         }
       };
       request.send(null);
+    },
+
+    removeParenthesesContent:function (text){
+      var start = text.indexOf("(");
+      var end = text.indexOf(")");
+      if (start !== -1 && end !== -1) {
+        parentheses = text.slice(start, end+1);
+        text = text.replace(parentheses,"");
+        text = text.replace("  ","");
+        return text;
+      }else {
+        return text;
+      }
     },
 
     test: function () {

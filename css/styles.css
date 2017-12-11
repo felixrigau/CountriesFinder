@@ -19,13 +19,14 @@ html, body {
     width: 65%;
     margin: 10px;
     height: 49px;
-    padding: 10px;
     font-family: lato;
     border: none;
     border-bottom: 5px solid rgb(67, 102, 138);
     color: rgba(192, 57, 43, 1);
     font-size: 16px;
     background-color: rgba(255,255,255,0.8);
+    font-weight: bold;
+    padding-left: 10px;
 }
 
 .country-container {
@@ -33,18 +34,29 @@ html, body {
   z-index: 1;
   width: 30%;
   height: 100%;
-  border: 10px solid rgba(255,255,255,0.4);
+  border-right: 10px solid rgba(255,255,255,0.4);
 }
 .country-info {
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(4, 51, 88, 0.74);
   height: 100%;
-  padding: 10px;
 }
 img.flag {
   width: 100%;
 }
 .name {
+  color: #fff;
   font-size: 36px;
   margin: 10px 0px;
   text-align: center;
+}
+.country-info p {
+    font-size: 22px;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 10px;
+}
+.country-info span {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 400;
 }
