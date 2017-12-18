@@ -24,6 +24,8 @@ html, body {
   z-index: 1;
   width: 100%;
   text-align: right;
+  transition: all 1s;
+        
 }
 .countries {
     width: 65%;
@@ -88,7 +90,4 @@ img.flag {
     font-size: 18px;
     color: #fff;
     font-weight: 400;
-}
-.hidden{
-  display: none;
 }

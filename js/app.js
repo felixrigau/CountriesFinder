@@ -113,7 +113,7 @@ var app = {
   },
 
   animation:{
-    showCountryDetailsPanel:function functionName(boolean) {
+    showCountryDetailsPanel:function (boolean) {
       var element = document.querySelector('.country-container');
       var existClass = false;
       if (boolean) {
