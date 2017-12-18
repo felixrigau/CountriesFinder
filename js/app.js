@@ -88,14 +88,6 @@ var app = {
       }else {
         element.classList.add('hidden');
       }
-    },
-
-    test:function (json) {
-      if (json) {
-        var container = document.querySelector('.general-container');
-        container.innerHTML = '<h1>THERE IS A JSON!!!, JSON.length = '+json.length+'</h1>';
-        console.table(json);
-      }
     }
   },
 
