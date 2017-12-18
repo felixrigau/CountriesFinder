@@ -1,5 +1,15 @@
 #map {
   height: 100%;
+  background: transparent url(../images/loader.svg) no-repeat center center;
+}
+.loader {
+  height: 100px;
+  background: url(../images/progress-loader.svg);
+  background-size: 100% 100%;
+  width: 100px;
+  position: relative;
+  top: -34px;
+  left: 34%;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -78,4 +88,7 @@ img.flag {
     font-size: 18px;
     color: #fff;
     font-weight: 400;
+}
+.hidden{
+  display: none;
 }

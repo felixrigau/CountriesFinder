@@ -17,6 +17,8 @@ var app = {
           countriesCombo.innerHTML += '<option class=\'item\' value=\"'+json[i].alpha2Code+'\">'+name+'</option>';
         }
         app.events.setOnChangeEvent();
+        var element = document.querySelector('.loader');
+        app.renderView.showHideElement(false,element);
       }
     },
 
@@ -38,6 +40,8 @@ var app = {
 
         app.renderView.maps.initCountryMap(json.name);
         app.animation.showCountryDetailsPanel(true);
+        var element = document.querySelector('.loader');
+        app.renderView.showHideElement(false,element);
       }
     },
 
@@ -78,6 +82,14 @@ var app = {
       }
     },
 
+    showHideElement:function (show, element) {
+      if (show) {
+        element.classList.remove('hidden');
+      }else {
+        element.classList.add('hidden');
+      }
+    },
+
     test:function (json) {
       if (json) {
         var container = document.querySelector('.general-container');
@@ -89,15 +101,15 @@ var app = {
 
   events:{
     setOnChangeEvent:function () {
-      var selectItems = document.querySelectorAll('.countries');
-      for (var i = 0; i < selectItems.length; i++) {
-        selectItems[i].addEventListener('change',function () {
-          if(event.target.value){
-            codeCountry = event.target.value;
-            app.countryManagement.details(codeCountry);
-          }
-        }, false);
-      }
+      var selectItems = document.querySelector('.countries');
+      selectItems.addEventListener('change',function () {
+        if(event.target.value){
+          var element = document.querySelector('.loader');
+          app.renderView.showHideElement(true,element);
+          codeCountry = event.target.value;
+          app.countryManagement.details(codeCountry);
+        }
+      }, false);
     },
 
     addToggleButton: function () {
@@ -184,6 +196,8 @@ var app = {
 };
 
 (function () {
+  var element = document.querySelector('.loader');
+  app.renderView.showHideElement(true,element);
   app.countryManagement.all();
   app.events.addToggleButton();
 })();
